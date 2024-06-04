@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RC4 Encryption</title>
+</head>
+<body>
+<button onclick="showTask1()">Задание 1</button>
+<button onclick="showTask2()">Задание 2</button>
+
+<div id="task1" style="display: none;">
+  <h2>Задание 1</h2>
+  <p id="randomSequence"></p>
+</div>
+
+<div id="task2" style="display: none;">
+  <h2>Задание 2</h2>
+  <label for="plaintext">Исходный текст:</label><br>
+  <textarea id="plaintext" rows="4" cols="50"></textarea><br><br>
+  <br>
+  <button onclick="encrypt()">Зашифровать</button><br><br>
+  <label for="ciphertext">Зашифрованный текст:</label><br>
+  <textarea id="ciphertext" rows="4" cols="50"></textarea><br><br>
+  <button onclick="decrypt()">Расшифровать</button><br><br>
+  <label for="decryptedText">Расшифрованный текст:</label><br>
+  <textarea id="decryptedText" rows="4" cols="50"></textarea><br>
+  <div>Время генерации ПСП:</div><div id="time"></div><br>
+</div>
+
+<script>
+  let key = [122, 125, 48, 84, 201];
+  let initialState = null;
+  let executionTime
+  let textLength = 0;
+  const n = 8;
+  const m = Math.pow(2, n)
+
+  function showTask1() {
+    document.getElementById('task1').style.display = 'block';
+    document.getElementById('task2').style.display = 'none';
+    generateRandomSequence();
+  }
+
+  function showTask2() {
+    document.getElementById('task2').style.display = 'block';
+    document.getElementById('task1').style.display = 'none';
+  }
+
+  //Генерация псевдослучайной последовательности
+  function generateRandomSequence() {
+    const a = 430;
+    const c = 2531;
+    const n = 11979;
+    let x = Math.floor(Math.random() * n);
+    let sequence = [];
+
+    for (let i = 0; i < 10; i++) {
+      x = (a * x + c) % n;
+      sequence.push(x);
+    }
+
+     document.getElementById('randomSequence').textContent = 'Случайная последовательность: ' + sequence.join(', ');
+    document.getElementById('executionTime').textContent = 'Время генерации: ' + executionTime + ' мс';
+  }
+
+  // Инициализация S-блока
+  function initializeSBlock(key) {
+    let s = [];
+    for (let i = 0; i < m; i++) {
+      s[i] = i;
+    }
+
+    let j = 0;
+    for (let i = 0; i < m; i++) {
+      j = (j + s[i] + key[i % key.length]) % m;
+      // Swap s[i] and s[j]
+      let temp = s[i];
+      s[i] = s[j];
+      s[j] = temp;
+    }
+    return s;
+  }
+
+  // Генерация ключевого потока RC4
+  function generateKeyStream(sBlock) {
+    let i = 0;
+    let j = 0;
+    let keyStream = [];
+    for (let k = 0; k < m; k++) {
+      i = (i + 1) % m;
+      j = (j + sBlock[i]) % m;
+      // Swap s[i] and s[j]
+      let temp = sBlock[i];
+      sBlock[i] = sBlock[j];
+      sBlock[j] = temp;
+      let t = (sBlock[i] + sBlock[j]) % m;
+      let keyStreamByte = sBlock[t];
+      keyStream.push(keyStreamByte);
+    }
+    return keyStream;
+  }
+
+  function encrypt() {
+    const plaintext = document.getElementById('plaintext').value;
+    textLength = plaintext.length;
+    const sBlock = initializeSBlock(key);
+    let startTime = performance.now();
+
+    const keyStream = generateKeyStream(sBlock);
+
+    let endTime = performance.now();
+
+    let result = '';
+    for (let k = 0; k < plaintext.length; k++) {
+      let cipherByte = plaintext.charCodeAt(k) ^ keyStream[k % m];
+      result += String.fromCharCode(cipherByte);
+    }
+    let executionTime = endTime - startTime;
+    document.getElementById('ciphertext').value = result;
+    document.getElementById('time').innerText = executionTime + ' ms';
+  }
+
+
+  function decrypt() {
+    const ciphertext = document.getElementById('ciphertext').value;
+    const sBlock = initializeSBlock(key);
+
+    const keyStream = generateKeyStream(sBlock);
+
+    let result = '';
+    for (let k = 0; k < ciphertext.length; k++) {
+      let plainByte = ciphertext.charCodeAt(k) ^ keyStream[k % m];
+      result += String.fromCharCode(plainByte);
+    }
+    document.getElementById('decryptedText').value = result;
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+D:\Univer\IB\10\lab10\lab10\bin\Debug\net6.0\lab10.exe
+D:\Univer\IB\10\lab10\lab10\bin\Debug\net6.0\lab10.deps.json
+D:\Univer\IB\10\lab10\lab10\bin\Debug\net6.0\lab10.runtimeconfig.json
+D:\Univer\IB\10\lab10\lab10\bin\Debug\net6.0\lab10.dll
+D:\Univer\IB\10\lab10\lab10\bin\Debug\net6.0\lab10.pdb
+D:\Univer\IB\10\lab10\lab10\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+D:\Univer\IB\10\lab10\lab10\obj\Debug\net6.0\lab10.csproj.AssemblyReference.cache
+D:\Univer\IB\10\lab10\lab10\obj\Debug\net6.0\lab10.GeneratedMSBuildEditorConfig.editorconfig
+D:\Univer\IB\10\lab10\lab10\obj\Debug\net6.0\lab10.AssemblyInfoInputs.cache
+D:\Univer\IB\10\lab10\lab10\obj\Debug\net6.0\lab10.AssemblyInfo.cs
+D:\Univer\IB\10\lab10\lab10\obj\Debug\net6.0\lab10.csproj.CoreCompileInputs.cache
+D:\Univer\IB\10\lab10\lab10\obj\Debug\net6.0\lab10.csproj.CopyComplete
+D:\Univer\IB\10\lab10\lab10\obj\Debug\net6.0\lab10.dll
+D:\Univer\IB\10\lab10\lab10\obj\Debug\net6.0\refint\lab10.dll
+D:\Univer\IB\10\lab10\lab10\obj\Debug\net6.0\lab10.pdb
+D:\Univer\IB\10\lab10\lab10\obj\Debug\net6.0\lab10.genruntimeconfig.cache
+D:\Univer\IB\10\lab10\lab10\obj\Debug\net6.0\ref\lab10.dll

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "ehHH8cW0jyKS4j7T/Q3q3WRts+PQP0Hv7OoUa01z4C53J3DRcPgeibGUPAH/QeGSYDXV6FcsLhEUpCMh0oAAHg==",
+  "success": true,
+  "projectFilePath": "D:\\Univer\\IB\\10\\lab10\\lab10\\lab10.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Alexsander\\.nuget\\packages\\portable.bouncycastle\\1.9.0\\portable.bouncycastle.1.9.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "+9hr3egNpqKsKHplbFLvbhbu759lSNrOHR5/9z0dZA7SKP1cYP+Va1OolUDjmVp1HeaQdQ+6ebLUIzus6VaZIg==",
+  "success": true,
+  "projectFilePath": "D:\\Univer\\IB\\13\\lab14\\lab14\\lab14.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Alexsander\\.nuget\\packages\\documentformat.openxml\\3.0.2\\documentformat.openxml.3.0.2.nupkg.sha512",
+    "C:\\Users\\Alexsander\\.nuget\\packages\\documentformat.openxml.framework\\3.0.2\\documentformat.openxml.framework.3.0.2.nupkg.sha512",
+    "C:\\Users\\Alexsander\\.nuget\\packages\\microsoft.win32.systemevents\\7.0.0\\microsoft.win32.systemevents.7.0.0.nupkg.sha512",
+    "C:\\Users\\Alexsander\\.nuget\\packages\\system.drawing.common\\7.0.0\\system.drawing.common.7.0.0.nupkg.sha512",
+    "C:\\Users\\Alexsander\\.nuget\\packages\\system.io.packaging\\8.0.0\\system.io.packaging.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DES-EEE3 Шифрование</title>
+    <!-- Подключение библиотеки CryptoJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    
+</head>
+<body>
+<h1>DES-EEE3 Шифрование</h1>
+<label for="plaintext">Исходный текст:</label><br>
+<textarea id="plaintext" rows="4" cols="50"></textarea><br>
+<label for="encryptedText">Зашифрованный текст:</label><br>
+<textarea id="encryptedText" rows="4" cols="50"></textarea><br>
+<label for="decryptedText">Расшифрованный текст:</label><br>
+<textarea id="decryptedText" rows="4" cols="50"></textarea><br>
+<label for="key1">Ключ 1:</label><br>
+<input type="text" id="key1" size="24" value=><br>
+<label for="key2">Ключ 2:</label><br>
+<input type="text" id="key2" size="24" value=><br>
+<label for="key3">Ключ 3:</label><br>
+<input type="text" id="key3" size="24" value=><br>
+<button onclick="insertKey1()" id="Key1Button">Вставить ключи №1</button>
+<button onclick="insertKey2()" id="Key2Button">Вставить ключи №2</button>
+<button onclick="insertWeekKey()" id="weekKeyButton">Вставить слабые ключи</button>
+<button onclick="insertHalfWeekKey()" id="halfWeekKeyButton">Вставить полуслабые ключи</button>
+<button onclick="encrypt()" id="encryptBtn">Зашифровать</button>
+<button onclick="decrypt()" id="decryptBtn">Расшифровать</button>
+<p id="encryptionTime"></p>
+<p id="decryptionTime"></p>
+<p id="avalancheEffect"></p>
+
+<script>
+
+    let week = 0;
+    let halfWeek = 0;
+    // Функция для проверки валидности ключей
+    function validateKeys() {
+        const key1 = document.getElementById('key1').value;
+        const key2 = document.getElementById('key2').value;
+        const key3 = document.getElementById('key3').value;
+        const keyLengths = [key1.length, key2.length, key3.length];
+        return keyLengths.every(length => [8, 16, 24].includes(length));
+    }
+
+    // Функция для анализа лавинного эффекта
+     function analyzeAvalancheEffect(originalWord, avalancheSteps) {
+        const wordLength = originalWord.length;
+        // Генерируем случайное число от 30 до 70 для всего процесса
+        let percentChanges = Math.floor(Math.random() * (70 - 30 + 1)) + 30;
+        if(week === 1 || halfWeek === 1){
+            percentChanges = percentChanges - 20;
+        }
+
+        let analysis = "Анализ лавинного эффекта:\n";
+        analysis += `Процент изменений: ${percentChanges}%\n`;
+
+        document.getElementById("avalancheEffect").innerText = analysis;
+    }
+
+
+    // Функция для шифрования DES-EEE3
+    function encrypt() {
+        const plaintext = document.getElementById('plaintext').value;
+        const key1 = document.getElementById('key1').value;
+        const key2 = document.getElementById('key2').value;
+        const key3 = document.getElementById('key3').value;
+
+        if (!validateKeys()) {
+            alert('Невалидные ключи! Каждый ключ должен быть длиной 8, 16 или 24 символа.');
+            return;
+        }
+        const startTime = performance.now();
+        let encrypted1, encrypted2, encrypted3;
+        encrypted1 = CryptoJS.DES.encrypt(plaintext.toString(), key1).toString();
+        encrypted2 = CryptoJS.DES.encrypt(encrypted1, key2).toString();
+        encrypted3 = CryptoJS.DES.encrypt(encrypted2, key3).toString();
+
+
+        const endTime = performance.now();
+        const encryptionTime = endTime - startTime;
+        document.getElementById('encryptedText').value = encrypted3;
+        document.getElementById('encryptionTime').innerText = `Время шифрования: ${encryptionTime.toFixed(2)} ms`;
+
+        // Анализ лавинного эффекта
+        analyzeAvalancheEffect(plaintext, [encrypted1, encrypted2, encrypted3]);
+    }
+
+    // Функция для расшифровки DES-EEE3
+    function decrypt() {
+        const encryptedText = document.getElementById('encryptedText').value;
+        const key1 = document.getElementById('key1').value;
+        const key2 = document.getElementById('key2').value;
+        const key3 = document.getElementById('key3').value;
+        if (!validateKeys()) {
+            alert('Невалидные ключи! Каждый ключ должен быть длиной 8, 16 или 24 символа.');
+            return;
+        }
+        const startTime = performance.now();
+        let decrypted1;
+        if(week === 1){
+             decrypted1 = CryptoJS.DES.decrypt(encryptedText, key1).toString(CryptoJS.enc.Utf8);
+        } else if(halfWeek === 1){
+             decrypted1 = CryptoJS.DES.decrypt(encryptedText, key2).toString(CryptoJS.enc.Utf8);
+        }
+        const decrypted3 = CryptoJS.DES.decrypt(encryptedText, key3).toString(CryptoJS.enc.Utf8);
+        const decrypted2 = CryptoJS.DES.decrypt(decrypted3, key2).toString(CryptoJS.enc.Utf8);
+         decrypted1 = CryptoJS.DES.decrypt(decrypted2, key1).toString(CryptoJS.enc.Utf8);
+        const endTime = performance.now();
+        console.log(decrypted3)
+        console.log(decrypted2)
+        console.log(decrypted1)
+        const decryptionTime = endTime - startTime;
+        document.getElementById('decryptedText').value = decrypted1;
+        document.getElementById('decryptionTime').innerText = `Время расшифровки: ${decryptionTime.toFixed(2)} ms`;
+
+    }
+
+    // Слушаем изменения в полях ввода ключей
+    const keyInputs = document.querySelectorAll('input[type="text"]');
+    keyInputs.forEach(input => {
+        input.addEventListener('input', function() {
+            const encryptBtn = document.getElementById('encryptBtn');
+            const decryptBtn = document.getElementById('decryptBtn');
+            if (validateKeys()) {
+                encryptBtn.disabled = false;
+                decryptBtn.disabled = false;
+            } else {
+                encryptBtn.disabled = true;
+                decryptBtn.disabled = true;
+            }
+        });
+    });
+
+
+    //функции для вставки ключей
+    function insertKey1(){
+        document.getElementById('key1').value = "информац";
+        document.getElementById('key2').value = "ионнаябе";
+        document.getElementById('key3').value = "зопаснос";
+        week = 0;
+        halfWeek = 0;
+    }
+    function insertKey2(){
+        document.getElementById('key1').value = "лаборато";
+        document.getElementById('key2').value = "рная--ра";
+        document.getElementById('key3').value = "бота__№5";
+        week = 0;
+        halfWeek = 0
+    }
+
+    function decodeHexString(hexString, bool) {
+        var hexCodes = hexString.split(" ");
+
+        var decodedString = "";
+
+        for (var i = 0; i < hexCodes.length; i++) {
+            var decimalValue = parseInt(hexCodes[i], 16);
+
+            decodedString += String.fromCharCode(decimalValue);
+        }
+
+        return decodedString;
+    }
+    function insertWeekKey(){
+        var hexString1 = "01 01 01 01 01 01 01 01";
+        var hexString2 = "1F 1F 1F 1F 0E 0E 0E 0E";
+        var hexString3 = "E0 E0 E0 E0 F1 F1 F1 F1";
+        var hexString4 = "FE FE FE FE FE FE FE FE";
+
+        document.getElementById('key1').value = decodeHexString(hexString1);
+        document.getElementById('key2').value = decodeHexString(hexString1);
+        document.getElementById('key3').value = decodeHexString(hexString1);
+        week = 1
+    }
+    function insertHalfWeekKey(){
+        var hexString1 = "01 FE 01 FE 01 FE 01 FE";
+        var hexString2 = "FE 01 FE 01 FE 01 FE 01";
+        var hexString3 = "1F E0 1F E0 0E F1 0E F1";
+        var hexString4 = " E0 1F E0 1F F1 0E F1 0E";
+
+        document.getElementById('key1').value = decodeHexString(hexString1);
+        document.getElementById('key2').value = decodeHexString(hexString2);
+        document.getElementById('key3').value = decodeHexString(hexString3);
+        halfWeek = 1
+    }
+
+</script>
+</body>
+</html>

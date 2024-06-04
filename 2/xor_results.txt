@@ -1,0 +1,2 @@
+Результат операции a XOR b XOR b в кодах ASCII: 
+Результат операции a XOR b XOR b в кодах base64: ExkHGRIGARk=

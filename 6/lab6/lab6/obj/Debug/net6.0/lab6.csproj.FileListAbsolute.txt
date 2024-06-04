@@ -1,0 +1,14 @@
+D:\Univer\IB\6\lab6\lab6\bin\Debug\net6.0\lab6.exe
+D:\Univer\IB\6\lab6\lab6\bin\Debug\net6.0\lab6.deps.json
+D:\Univer\IB\6\lab6\lab6\bin\Debug\net6.0\lab6.runtimeconfig.json
+D:\Univer\IB\6\lab6\lab6\bin\Debug\net6.0\lab6.dll
+D:\Univer\IB\6\lab6\lab6\bin\Debug\net6.0\lab6.pdb
+D:\Univer\IB\6\lab6\lab6\obj\Debug\net6.0\lab6.GeneratedMSBuildEditorConfig.editorconfig
+D:\Univer\IB\6\lab6\lab6\obj\Debug\net6.0\lab6.AssemblyInfoInputs.cache
+D:\Univer\IB\6\lab6\lab6\obj\Debug\net6.0\lab6.AssemblyInfo.cs
+D:\Univer\IB\6\lab6\lab6\obj\Debug\net6.0\lab6.csproj.CoreCompileInputs.cache
+D:\Univer\IB\6\lab6\lab6\obj\Debug\net6.0\lab6.dll
+D:\Univer\IB\6\lab6\lab6\obj\Debug\net6.0\refint\lab6.dll
+D:\Univer\IB\6\lab6\lab6\obj\Debug\net6.0\lab6.pdb
+D:\Univer\IB\6\lab6\lab6\obj\Debug\net6.0\lab6.genruntimeconfig.cache
+D:\Univer\IB\6\lab6\lab6\obj\Debug\net6.0\ref\lab6.dll
